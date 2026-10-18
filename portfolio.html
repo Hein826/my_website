@@ -87,11 +87,14 @@ h2{font:700 1.9rem/1.2 var(--head);letter-spacing:-.02em;margin:0 0 .5rem}
 .learn ul{list-style:none;margin:0;padding:0;display:grid;gap:.9rem}
 .learn li strong{display:block;font-weight:600;line-height:1.35}
 .learn li span{color:var(--muted);font-size:.95rem}
+.lnks{display:flex;flex-direction:column;gap:.6rem;margin-top:1.5rem;align-items:flex-start}
+.lnks .btn{padding:.5rem 1rem}
 
 /* about + contact */
 .about{display:grid;grid-template-columns:2fr 1fr;gap:2.5rem}
 .about p{margin:0 0 1rem;max-width:40rem}
 .skills h3{font:700 1.1rem var(--head);margin:0 0 .6rem}
+.skills h4{font:600 .8rem var(--body);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:1.1rem 0 .5rem}
 footer{border-top:1px solid var(--line);padding:2rem 0 3rem;color:var(--muted);font-size:.95rem}
 
 @media (max-width:42rem){
@@ -130,7 +133,7 @@ footer{border-top:1px solid var(--line);padding:2rem 0 3rem;color:var(--muted);f
           <a class="btn" href="#contact">Get in touch</a>
         </div>
       </div>
-      <div class="avatar" id="avatar" aria-hidden="true"></div>
+      <div class="avatar" id="avatar"></div>
     </div>
 
     <section id="projects" aria-labelledby="ph">
@@ -142,12 +145,16 @@ footer{border-top:1px solid var(--line);padding:2rem 0 3rem;color:var(--muted);f
 
         <section id="experience" aria-labelledby="eh">
       <h2 id="eh">Experience and learning</h2>
-      <p class="sub">Where I’ve worked, and the training behind my data skills.</p>
+      <p class="sub">Where I’ve worked, and the training behind my data skills. Certificates can be verified on Credly or viewed in full on Google Drive.</p>
       <div class="exp">
         <ol class="jobs" id="jobs"></ol>
         <div class="learn">
           <h3>Education and certificates</h3>
           <ul id="learn"></ul>
+          <div class="lnks">
+            <a class="btn" id="credly" href="#" target="_blank" rel="noopener">Credly profile ↗</a>
+            <a class="btn" id="certs" href="#" target="_blank" rel="noopener">All certificates ↗</a>
+          </div>
         </div>
       </div>
     </section>
@@ -157,8 +164,8 @@ footer{border-top:1px solid var(--line);padding:2rem 0 3rem;color:var(--muted);f
       <div class="about">
         <div id="about-text"></div>
         <div class="skills">
-          <h3>Tools I use</h3>
-          <ul class="tags" id="skills"></ul>
+          <h3>Skills</h3>
+          <div id="skills"></div>
         </div>
       </div>
     </section>
@@ -170,6 +177,7 @@ footer{border-top:1px solid var(--line);padding:2rem 0 3rem;color:var(--muted);f
         <a class="btn primary" id="mail" href="#">Send an email</a>
         <a class="btn" id="li" href="#">LinkedIn</a>
         <a class="btn" id="cv" href="#">Download CV</a>
+        <a class="btn" id="credly2" href="#" target="_blank" rel="noopener">Credly badges</a>
       </div>
     </section>
   </main>
@@ -182,18 +190,24 @@ footer{border-top:1px solid var(--line);padding:2rem 0 3rem;color:var(--muted);f
 const SITE = {
   name: "Hein Thiha Thu",
   role: "Data analyst · Network performance & telecom operations",
-  intro: "I turn network and operations data into clear reports, KPIs and dashboards. With 4+ years in telecom NOC and performance analysis, I work with Excel, SQL and Power BI to help teams cut downtime and make better decisions.",
+  intro: "I turn network and operations data into clear reports, KPIs and dashboards. With 4+ years in telecom NOC and performance analysis, I work with Excel, SQL, Python and Power BI to help teams cut downtime and make better decisions.",
   initials: "HT",
-  photo: "",                                   // optional: "images/me.jpg"
+  photo: "https://hein826.github.io/my_website/me.jpg",                      // keep the images folder next to index.html
   github: "https://github.com/yourusername",   // replace with your GitHub profile
   linkedin: "https://www.linkedin.com/in/hein-thiha-thub9803b108",
   email: "heinthurathu34@gmail.com",
   cv: "Hein_Thiha_Thu_V2.pdf",                 // upload this PDF next to index.html
+  credly: "https://www.credly.com/users/hein-thiha-thu",
+  certs: "https://drive.google.com/drive/folders/1ayv4VPPCYxuCwpJdzw7PQ7LYxP4_EjCV?usp=sharing",
   about: [
     "I’m a data analyst based in Bangkok, Thailand, originally from Myanmar. I started in telecom network operations, monitoring and troubleshooting live networks around the clock, and moved into performance analysis, where I report on SLA results and KPIs across sites, regions and teams.",
-    "I hold a Bachelor of Mechatronics Engineering (Hons) from the University of Wolverhampton and a professional certificate in SQL and Power BI from DavidsonX on edX. I speak English and Burmese."
+    "I hold a Bachelor of Mechatronics Engineering (Hons) from the University of Wolverhampton, a professional certificate in SQL and Power BI from DavidsonX on edX, and Credly badges in Python, data analysis and data visualization. I speak English and Burmese."
   ],
-  skills: ["Advanced Excel","Power Query","PivotTables","Power BI","DAX","SQL","Access","SLA management","NOC operations","Network monitoring"]
+  skills: [
+    { group:"Analysis and dashboards", items:["Advanced Excel","Power Query","PivotTables","Power BI","DAX","Data visualization","Dashboard design"] },
+    { group:"Data and programming",    items:["SQL","Relational databases","Python","Data analysis with Python","Access"] },
+    { group:"Telecom operations",      items:["SLA management","KPI reporting","NOC operations","Network monitoring"] }
+  ]
 };
 
 const EXPERIENCE = [
@@ -212,9 +226,11 @@ const EXPERIENCE = [
 ];
 
 const LEARNING = [
+  { title:"Data Analysis and Visualization Foundations Specialization", sub:"IBM via Coursera · Specialization certificate · Sep 2025" },
   { title:"From Database to Dashboard using SQL and Power BI", sub:"Professional certificate · DavidsonX on edX" },
-  { title:"Analyzing and Visualizing Data with Power BI", sub:"Verified certificate · DavidsonX (D005)" },
-  { title:"Introduction to SQL", sub:"Verified certificate · DavidsonX (D007)" },
+  { title:"Databases and SQL for Data Science", sub:"IBM via Coursera · Credly badge" },
+  { title:"Data Analysis with Python", sub:"IBM via Coursera · Credly badge" },
+  { title:"Python for Data Science and AI", sub:"IBM via Coursera · Credly badge" },
   { title:"BEng (Hons) Mechatronics Engineering", sub:"University of Wolverhampton · 2019" },
   { title:"HND in Mechanical Engineering", sub:"Victoria University College · 2017" }
 ];
@@ -249,10 +265,12 @@ $("yr").textContent = new Date().getFullYear();
 $("gh").href = SITE.github;
 $("li").href = SITE.linkedin;
 $("cv").href = SITE.cv;
+$("credly").href = $("credly2").href = SITE.credly;
+$("certs").href = SITE.certs;
 $("mail").href = "mailto:" + SITE.email;
-$("avatar").innerHTML = SITE.photo ? `<img src="${safe(SITE.photo)}" alt="">` : safe(SITE.initials);
+$("avatar").innerHTML = SITE.photo ? `<img src="${safe(SITE.photo)}" alt="Portrait of ${safe(SITE.name)}" width="600" height="600">` : safe(SITE.initials);
 $("about-text").innerHTML = SITE.about.map(p => `<p>${safe(p)}</p>`).join("");
-$("skills").innerHTML = SITE.skills.map(s => `<li>${safe(s)}</li>`).join("");
+$("skills").innerHTML = SITE.skills.map(g => `<h4>${safe(g.group)}</h4><ul class="tags">${g.items.map(i => `<li>${safe(i)}</li>`).join("")}</ul>`).join("");
 
 $("jobs").innerHTML = EXPERIENCE.map(j => `
   <li class="job">
