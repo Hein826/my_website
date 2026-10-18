@@ -91,6 +91,9 @@ h2{font:700 1.9rem/1.2 var(--head);letter-spacing:-.02em;margin:0 0 .5rem}
 .lnks .btn{padding:.5rem 1rem}
 
 /* about + contact */
+.contact-list{margin:0 0 1.5rem;display:grid;gap:.6rem}
+.contact-list dt{font:600 .8rem var(--body);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.contact-list dd{margin:0;font-weight:600}
 .about{display:grid;grid-template-columns:2fr 1fr;gap:2.5rem}
 .about p{margin:0 0 1rem;max-width:40rem}
 .skills h3{font:700 1.1rem var(--head);margin:0 0 .6rem}
@@ -172,7 +175,10 @@ footer{border-top:1px solid var(--line);padding:2rem 0 3rem;color:var(--muted);f
 
     <section id="contact" aria-labelledby="ch">
       <h2 id="ch">Contact</h2>
-      <p class="sub">Open to new projects and conversations. The quickest way to reach me is email.</p>
+      <p class="sub">Open to data analyst roles and new opportunities. The quickest way to reach me is email; my full details are in my CV.</p>
+      <dl class="contact-list">
+        <div><dt>Email</dt><dd><a id="mail-text" href="#"></a></dd></div>
+      </dl>
       <div class="btns">
         <a class="btn primary" id="mail" href="#">Send an email</a>
         <a class="btn" id="li" href="#">LinkedIn</a>
@@ -195,7 +201,7 @@ const SITE = {
   photo: "https://hein826.github.io/my_website/me.jpg",                      // keep the images folder next to index.html
   github: "https://github.com/yourusername",   // replace with your GitHub profile
   linkedin: "https://www.linkedin.com/in/hein-thiha-thub9803b108",
-  email: "heinthurathu34@gmail.com",
+  email: "heinthurathu4@gmail.com",
   cv: "Hein_Thiha_Thu_V2.pdf",                 // upload this PDF next to index.html
   credly: "https://www.credly.com/users/hein-thiha-thu",
   certs: "https://drive.google.com/drive/folders/1ayv4VPPCYxuCwpJdzw7PQ7LYxP4_EjCV?usp=sharing",
@@ -268,6 +274,8 @@ $("cv").href = SITE.cv;
 $("credly").href = $("credly2").href = SITE.credly;
 $("certs").href = SITE.certs;
 $("mail").href = "mailto:" + SITE.email;
+$("mail-text").href = "mailto:" + SITE.email;
+$("mail-text").textContent = SITE.email;
 $("avatar").innerHTML = SITE.photo ? `<img src="${safe(SITE.photo)}" alt="Portrait of ${safe(SITE.name)}" width="600" height="600">` : safe(SITE.initials);
 $("about-text").innerHTML = SITE.about.map(p => `<p>${safe(p)}</p>`).join("");
 $("skills").innerHTML = SITE.skills.map(g => `<h4>${safe(g.group)}</h4><ul class="tags">${g.items.map(i => `<li>${safe(i)}</li>`).join("")}</ul>`).join("");
